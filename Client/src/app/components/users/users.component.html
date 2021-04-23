@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form #userForm="ngForm" (ngSubmit)="createUser(userForm)">
+                    <input type="hidden" name="Id" [(ngModel)]="userService.user.Id">
+
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Ingresa tu dni" 
+                            name="Dni" 
+                            [(ngModel)]="userService.user.Dni"
+                            [pattern]="regex" #unameDni="ngModel"/>
+                        
+                        <div *ngIf="unameDni.errors?.pattern" class="text-danger"> 
+                            Solo se permiten números.
+                        </div> 
+                    </div>
+    
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Ingresa tu nombre" 
+                            name="Name"
+                            [(ngModel)]="userService.user.Name">
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Ingresa tu apellido" 
+                            name="LastName"
+                            [(ngModel)]="userService.user.LastName">
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Ingresa tu email" 
+                            name="Email"
+                            [(ngModel)]="userService.user.Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            placeholder="Ingresa tu Teléfono" 
+                            name="Phone"
+                            [(ngModel)]="userService.user.Phone"
+                            [pattern]="regex" #unamePhone="ngModel">
+                        
+                        <div *ngIf="unamePhone.errors?.pattern" class="text-danger"> 
+                            Solo se permiten números.
+                        </div> 
+                    </div>
+
+                    <button class="btn btn-primary btn-block">
+                        save
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Dni</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let user of userService.users">
+                    <td>{{ user.Dni }}</td>
+                    <td>{{ user.Name }}</td>
+                    <td>{{ user.LastName }}</td>
+                    <td>{{ user.Email }}</td>
+                    <td>{{ user.Phone }}</td>
+                    <td>
+                        <button class="btn btn-secondary mr-2 btn-sm" (click)="updateSelected(user)">
+                            Edit
+                        </button>
+
+                        <button class="btn btn-danger btn-sm" (click)="deleteUser(user.Id)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="showAlert"  [ngClass]="{'alert-danger':isAlertDanger, 'alert-success':isAlertDanger == false}" class="alert" role="alert">
+            <strong>{{ showTtext }}</strong>
+
+            <button (click)="closeAlert()" type="button" class="close" data-dimiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+# compiled output
+Client/dist
+Server/src/public
+
+# dependencies
+Client/node_modules
+Server/node_modules
