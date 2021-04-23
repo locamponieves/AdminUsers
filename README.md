@@ -11,7 +11,10 @@ Ejecutar el proyecto en Angular:
 `ng serve`
 
 Compilar el proyecto a código JavaScript:
+
 `ng build`
+
+Automaticamente ese código se va a guardar en la carpeta public del proyecto Server(NodeJS)
 
 # Proyecto NodeJS
 
